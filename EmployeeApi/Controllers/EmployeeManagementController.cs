@@ -159,7 +159,7 @@ namespace EmployeeApi.Controllers
         [HttpPost("getLogin")]
         public async Task<IActionResult> GetLogin(LoginDetails employee)
         {
-            var user= _dataBaseContext.Employees.SingleOrDefaultAsync(e=>e.EmailId==employee.email &&e.Password==employee.password);
+            var user=await _dataBaseContext.Employees.SingleOrDefaultAsync(e=>e.EmailId==employee.email &&e.Password==employee.password);
             if(user == null)
             {
                 return NotFound(new ApiResponse<object>
@@ -172,15 +172,15 @@ namespace EmployeeApi.Controllers
                     Result = true,
                     Data = new
                     {
-                        user.Result.EmployeeId,
-                        user.Result.EmployeeName,
-                        user.Result.ContactNo,
-                        user.Result.EmailId,
-                        user.Result.DeptId,
-                        user.Result.Password,
-                        user.Result.Gender,
-                        user.Result.Role,
-                        user.Result.CreatedDate
+                        user.EmployeeId,
+                        user.EmployeeName,
+                        user.ContactNo,
+                        user.EmailId,
+                        user.DeptId,
+                        user.Password,
+                        user.Gender,
+                        user.Role,
+                        user.CreatedDate
                     }
                 };
             
