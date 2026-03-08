@@ -83,7 +83,7 @@ namespace EmployeeApi.Controllers
             _dataBaseContext.SaveChangesAsync();
             var response = new ApiResponse<object>
             {
-                Message = "Employee Add Succesfully",
+                result_Message = "Employee Add Succesfully",
                 Result = true,
                 Data = employee
             };
@@ -98,7 +98,7 @@ namespace EmployeeApi.Controllers
                 return NotFound(new ApiResponse<object>
                 {
 
-                    Message = "User not found",
+                    result_Message = "User details not found",
                     Result = false,
                     Data = null
                 });
@@ -114,7 +114,7 @@ namespace EmployeeApi.Controllers
             _dataBaseContext.SaveChangesAsync();
             var response = new ApiResponse<object>
             {
-                Message = "Employee Updated Succesfully",
+                result_Message = "Employee Updated Succesfully now",
                 Result = true,
                 Data = updateEmployee
             };
@@ -130,7 +130,7 @@ namespace EmployeeApi.Controllers
                 return NotFound(new ApiResponse<object>
                 {
 
-                    Message = "User not found",
+                    result_Message = "User details not found",
                     Result = false,
                     Data = null
                 });
@@ -138,21 +138,9 @@ namespace EmployeeApi.Controllers
 
             var response = new ApiResponse<object>
             {
-                Message = "user found",
+                result_Message = "user details found",
                 Result = true,
                 Data = employeeDetails
-                //new
-                //{
-                //    employeeDetails.Result.EmployeeId,
-                //    employeeDetails.Result.EmployeeName,
-                //    employeeDetails.Result.ContactNo,
-                //    employeeDetails.Result.EmailId,
-                //    employeeDetails.Result.DeptId,
-                //    employeeDetails.Result.Password,
-                //    employeeDetails.Result.Gender,
-                //    employeeDetails.Result.Role,
-                //    employeeDetails.Result.CreatedDate
-                //}
             };
             return Ok(response);
         }
@@ -163,12 +151,12 @@ namespace EmployeeApi.Controllers
             if(user == null)
             {
                 return NotFound(new ApiResponse<object>
-                { Data = null, Message = "user not found", Result = false });
+                { Data = null, result_Message = "user details not found", Result = false });
             }
 
                 var response = new ApiResponse<object>
                 {
-                    Message = "user found",
+                    result_Message = "user details found",
                     Result = true,
                     Data = new
                     {
@@ -198,7 +186,7 @@ namespace EmployeeApi.Controllers
             await _dataBaseContext.SaveChangesAsync();
             var response = new ApiResponse<object>
             {
-                Message = "Data Creation Successfull",
+                result_Message = "Data Creation Successfull",
                 Result = true,
                 Data = new ParentDepartment
                 {
@@ -224,7 +212,7 @@ namespace EmployeeApi.Controllers
             await _dataBaseContext.SaveChangesAsync();
             var response = new ApiResponse<object>
             {
-                Message = "Data Creation Successfull",
+                result_Message = "Data Creation Successfull",
                 Result = true,
                 Data = new ChildDepartment
                 {
@@ -245,7 +233,7 @@ namespace EmployeeApi.Controllers
 
             var response = new ApiResponse<object>
             {
-                Message = "Data Createment succesfull",
+                result_Message = "Data Createment succesfull",
                 Result = true,
                 Data= parentResult
             };
@@ -265,7 +253,7 @@ namespace EmployeeApi.Controllers
                 }).ToListAsync();
             var response = new ApiResponse<object>
             {
-                Message = "Data Createment succesfull",
+                result_Message = "Data Createment succesfull",
                 Result = true,
                 Data= children
             };
@@ -276,7 +264,7 @@ namespace EmployeeApi.Controllers
 
     public class ApiResponse<T>
     {
-        public string Message { get; set; }
+        public string result_Message { get; set; }
         public bool Result { get; set; }
         public T Data { get; set; }
     }
