@@ -37,39 +37,8 @@ namespace EmployeeApi.Controllers
       //  [TypeFilter(typeof(HttpResponseExceptionFilter))]
         public async Task<IActionResult> GetEmployees()
         {
-         //   throw new Exception("Excpetion Occures fetching all the employees");
-            //if(!_cacheProvider.TryGetValue(CacheKeys.Employee,out List<Employee> employee))
-            //{
-            //    employee= await _dataBaseContext.Employees.ToListAsync();
-            //    var chacheEntryOptions = new MemoryCacheEntryOptions
-            //    {
-            //        AbsoluteExpiration = DateTime.Now.AddSeconds(30),
-            //        SlidingExpiration=TimeSpan.FromSeconds(30),
-            //        Size=1024
-            //    };
-            //    _cacheProvider.Set(CacheKeys.Employee,employee, chacheEntryOptions);
-            //}
+
             return Ok(await _dataBaseContext.Employees.ToListAsync());
-
-            //var employeeDetails =await _dataBaseContext.Employees.ToListAsync();
-            //if (employeeDetails == null)
-            //{
-            //    return NotFound(new ApiResponse<object>
-            //    {
-
-            //        Message = "User not found",
-            //        Result = false,
-            //        Data = null
-            //    });
-            //}
-
-            //var response = new ApiResponse<object>
-            //{
-            //    Message = "user found",
-            //    Result = true,
-            //    Data = employeeDetails
-            //};
-            //return Ok(response);
         }
         //Add Employee
         [HttpPost("AddEmployee")]
@@ -80,7 +49,7 @@ namespace EmployeeApi.Controllers
                 return BadRequest("Employee ID Already Exists");
             }
              await _dataBaseContext.Employees.AddAsync(employee);
-            _dataBaseContext.SaveChangesAsync();
+           await _dataBaseContext.SaveChangesAsync();
             var response = new ApiResponse<object>
             {
                 result_Message = "Employee Add Succesfully",
